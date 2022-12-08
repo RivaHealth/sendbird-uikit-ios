@@ -24,7 +24,7 @@ public extension UIImageView {
                    thumbnailSize: CGSize? = nil,
                    cacheKey: String? = nil,
                    completion: ((Bool) -> Void)? = nil) -> URLSessionTask? {
-        self.setImage(placeholder, contentMode: .center)
+        self.setImage(placeholder, contentMode: .scaleAspectFit)
         
         if urlString.isEmpty {
             if let errorImage = errorImage {
