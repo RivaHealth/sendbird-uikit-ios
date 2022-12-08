@@ -29,7 +29,12 @@ class SBUConstant {
     
     static let extensionKeyUIKit = "sb_uikit"
     
-    static let bundleIdentifier = "com.sendbird.uikit"
+    /// Represents the `resource_bundle` created by Cocoapods (declared in `SendBirdUIKit.podspec`).
+    static let sendbirdAssetBundle = Bundle(url: SBUConstant.currentBundle.url(forResource: "SendbirdAssetBundle", withExtension: "bundle")!)
+
+    static let currentBundle = Bundle(for: SBUConstant.self)
+    static var bundleIdentifier = SBUConstant.currentBundle.bundleIdentifier!
+    
     
     static let groupChannelDelegateIdentifier = "\(bundleIdentifier).delegate.channel.group"
     static let openChannelDelegateIdentifier = "\(bundleIdentifier).delegate.channel.open"
