@@ -22,9 +22,10 @@ public extension UIImageView {
                    errorImage: UIImage? = nil,
                    option: ImageOption = .original,
                    thumbnailSize: CGSize? = nil,
+                   contentMode: ContentMode = .center,
                    cacheKey: String? = nil,
                    completion: ((Bool) -> Void)? = nil) -> URLSessionTask? {
-        self.setImage(placeholder, contentMode: .center)
+        self.setImage(placeholder, contentMode: contentMode)
         
         if urlString.isEmpty {
             if let errorImage = errorImage {

@@ -1730,7 +1730,7 @@ public class SBUMessageCellTheme {
     
     // User
     public var userPlaceholderBackgroundColor: UIColor
-    public var userPlaceholderTintColor: UIColor
+    public var userPlaceholderTintColor: UIColor?
     public var userNameFont: UIFont
     public var userNameTextColor: UIColor
     public var currentUserNameTextColor: UIColor
@@ -2062,7 +2062,7 @@ public class SBUUserCellTheme {
     public var userIdTextColor: UIColor
     public var userIdTextFont: UIFont
     public var userPlaceholderBackgroundColor: UIColor
-    public var userPlaceholderTintColor: UIColor
+    public var userPlaceholderTintColor: UIColor?
     public var mutedStateBackgroundColor: UIColor
     public var mutedStateIconColor: UIColor
     public var subInfoTextColor: UIColor
@@ -2419,7 +2419,7 @@ public class SBUUserProfileTheme {
     public var overlayColor: UIColor
     public var backgroundColor: UIColor
     public var userPlaceholderBackgroundColor: UIColor
-    public var userPlaceholderTintColor: UIColor
+    public var userPlaceholderTintColor: UIColor?
     public var usernameTextColor: UIColor
     public var usernameFont: UIFont
     public var largeItemTintColor: UIColor
@@ -3004,7 +3004,7 @@ public class SBUComponentTheme {
     
     // placeholder
     public var userPlaceholderBackgroundColor: UIColor
-    public var userPlaceholderTintColor: UIColor
+    public var userPlaceholderTintColor: UIColor?
     
     public var placeholderBackgroundColor: UIColor
     public var placeholderTintColor: UIColor

@@ -87,7 +87,8 @@ open class SBUMessageProfileView: SBUView {
             placeholder: SBUIconSetType.iconUser.image(
                 with: self.theme.userPlaceholderTintColor,
                 to: SBUIconSetType.Metric.iconUserProfileInChat
-            )
+            ),
+            contentMode: .scaleAspectFit
         )
         self.imageView.backgroundColor = theme.userPlaceholderBackgroundColor
     }
