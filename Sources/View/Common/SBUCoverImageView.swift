@@ -165,7 +165,7 @@ public class SBUCoverImageView: UIView {
             withImage: type.image(with: tintColor, to: iconSize),
             backgroundColor: backgroundColor,
             makeCircle: true,
-            contentMode: .center
+            contentMode: .scaleAspectFit
         )
         self.addSubview(imageView)
         
@@ -238,7 +238,7 @@ public class SBUCoverImageView: UIView {
                 to: self.iconSize
             )
             imageView.backgroundColor = theme.userPlaceholderBackgroundColor
-            imageView.contentMode = .center
+            imageView.contentMode = .scaleAspectFit
             imageView.clipsToBounds = true
             
             mainStackView.addArrangedSubview(imageView)
