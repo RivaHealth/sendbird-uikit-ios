@@ -25,13 +25,31 @@ public extension UIImageView {
                    contentMode: ContentMode = .center,
                    cacheKey: String? = nil,
                    completion: ((Bool) -> Void)? = nil) -> URLSessionTask? {
-        self.setImage(placeholder, contentMode: contentMode)
+        let originalContentMode = self.contentMode
+        let onCompletion: ((Bool) -> Void) = { [completion, originalContentMode] onSucceed in
+            
+            if Thread.isMainThread {
+                self.contentMode = originalContentMode
+            } else {
+                DispatchQueue.main.async {
+                    self.contentMode = originalContentMode
+                }
+            }
+            
+            completion?(onSucceed)
+        }
+        
+        if let placeholder = placeholder {
+            self.setImage(placeholder, contentMode: .center)
+        } else {
+            self.setImage(nil, contentMode: self.contentMode)
+        }
         
         if urlString.isEmpty {
             if let errorImage = errorImage {
                 self.image = errorImage
             }
-            completion?(false)
+            onCompletion(false)
             return nil
         }
         
@@ -41,7 +59,7 @@ public extension UIImageView {
                 urlString: urlString,
                 errorImage: errorImage,
                 cacheKey: cacheKey,
-                completion: completion
+                completion: onCompletion
             )
         case .imageToThumbnail:
             return self.loadThumbnailImage(
@@ -49,14 +67,14 @@ public extension UIImageView {
                 errorImage: errorImage,
                 thumbnailSize: thumbnailSize,
                 cacheKey: cacheKey,
-                completion: completion
+                completion: onCompletion
             )
         case .videoURLToImage:
             return self.loadVideoThumbnailImage(
                 urlString: urlString,
                 errorImage: errorImage,
                 cacheKey: cacheKey,
-                completion: completion
+                completion: onCompletion
             )
         }
     }
