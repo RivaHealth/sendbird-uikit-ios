@@ -25,31 +25,17 @@ public extension UIImageView {
                    contentMode: ContentMode = .center,
                    cacheKey: String? = nil,
                    completion: ((Bool) -> Void)? = nil) -> URLSessionTask? {
-        let originalContentMode = self.contentMode
-        let onCompletion: ((Bool) -> Void) = { [completion, originalContentMode] onSucceed in
-            
-            if Thread.isMainThread {
-                self.contentMode = originalContentMode
-            } else {
-                DispatchQueue.main.async {
-                    self.contentMode = originalContentMode
-                }
-            }
-            
-            completion?(onSucceed)
-        }
-        
         if let placeholder = placeholder {
-            self.setImage(placeholder, contentMode: .center)
+            self.setImage(placeholder, contentMode: contentMode)
         } else {
-            self.setImage(nil, contentMode: self.contentMode)
+            self.setImage(nil, contentMode: contentMode)
         }
         
         if urlString.isEmpty {
             if let errorImage = errorImage {
                 self.image = errorImage
             }
-            onCompletion(false)
+            completion?(false)
             return nil
         }
         
@@ -59,7 +45,7 @@ public extension UIImageView {
                 urlString: urlString,
                 errorImage: errorImage,
                 cacheKey: cacheKey,
-                completion: onCompletion
+                completion: completion
             )
         case .imageToThumbnail:
             return self.loadThumbnailImage(
@@ -67,14 +53,14 @@ public extension UIImageView {
                 errorImage: errorImage,
                 thumbnailSize: thumbnailSize,
                 cacheKey: cacheKey,
-                completion: onCompletion
+                completion: completion
             )
         case .videoURLToImage:
             return self.loadVideoThumbnailImage(
                 urlString: urlString,
                 errorImage: errorImage,
                 cacheKey: cacheKey,
-                completion: onCompletion
+                completion: completion
             )
         }
     }
