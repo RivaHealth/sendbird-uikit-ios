@@ -25,11 +25,7 @@ public extension UIImageView {
                    contentMode: ContentMode = .center,
                    cacheKey: String? = nil,
                    completion: ((Bool) -> Void)? = nil) -> URLSessionTask? {
-        if let placeholder = placeholder {
-            self.setImage(placeholder, contentMode: contentMode)
-        } else {
-            self.setImage(nil, contentMode: contentMode)
-        }
+        self.setImage(placeholder, contentMode: contentMode)
         
         if urlString.isEmpty {
             if let errorImage = errorImage {
